@@ -1,0 +1,585 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book an Appointment | Elite Ink</title>
+<link rel="stylesheet" href="styles.css"><style>
+* { box-sizing: border-box; }
+
+body {
+    background: #171819;
+    color: #f5f5f5;
+}
+
+.booking-wrap {
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 0 16px 40px;
+}
+
+.booking-box {
+    background: #222;
+    border: 1px solid #3c3c3c;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+h1, h2 { line-height: 1.3; }
+
+.subtitle {
+    color: #bbb;
+    line-height: 1.7;
+}
+
+.step-label {
+    color: #c6b49a;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.progress {
+    height: 5px;
+    background: #444;
+    border-radius: 5px;
+    margin: 15px 0 28px;
+    overflow: hidden;
+}
+
+#progressFill {
+    height: 100%;
+    width: 25%;
+    background: #c6b49a;
+    transition: width .2s;
+}
+
+.step { display: none; }
+.step.active { display: block; }
+
+.field { margin: 20px 0; }
+
+.field label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #505050;
+    background: #151515;
+    color: white;
+    font: inherit;
+}
+
+.field textarea {
+    min-height: 95px;
+    resize: vertical;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.choice {
+    padding: 18px 12px;
+    background: #181818;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+}
+
+.choice.selected {
+    border: 2px solid #c6b49a;
+    background: #302a22;
+}
+
+.choice span {
+    display: block;
+    color: #c6b49a;
+    margin-top: 8px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.actions button {
+    min-height: 48px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font: inherit;
+    cursor: pointer;
+}
+
+#backBtn {
+    background: transparent;
+    color: white;
+    border: 1px solid #666;
+}
+
+#nextBtn, #createBtn, #printBtn {
+    background: #c6b49a;
+    color: #171717;
+    border: 1px solid #c6b49a;
+}
+
+.hidden { display: none !important; }
+
+.note {
+    color: #c6b49a;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.review {
+    background: #171717;
+    padding: 16px;
+    border-radius: 8px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+#receipt {
+    background: white;
+    color: #222;
+    border-radius: 10px;
+    padding: 24px;
+    margin-top: 24px;
+}
+
+#receipt h2 { color: #222; }
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    border-bottom: 1px solid #ddd;
+    padding: 11px 0;
+}
+
+.receipt-row span:last-child {
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.receipt-status {
+    background: #f1eee8;
+    padding: 15px;
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+@media (max-width: 450px) {
+    .booking-box { padding: 18px; }
+    .choices { grid-template-columns: 1fr; }
+}
+
+@media print {
+    body { background: white !important; }
+    body * { visibility: hidden !important; }
+
+    #receipt, #receipt * {
+        visibility: visible !important;
+    }
+
+    #receipt {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .no-print { display: none !important; }
+}
+</style></head><body></head>
+<body><div id="elite-loader">
+    <div class="elite-loader-logo">ELITE <span>INK</span></div>
+    <div class="elite-loader-ring"></div>
+    <div class="elite-loader-text">PREPARING YOUR EXPERIENCE</div>
+</div><script>
+(function () {
+    var loader = document.getElementById("elite-loader");
+
+    function hideLoader() {
+        if (loader) {
+            loader.classList.add("loader-hidden");
+        }
+    }
+
+    window.addEventListener("load", function () {
+        setTimeout(hideLoader, 700);
+    });
+
+    setTimeout(hideLoader, 4000);
+})();
+</script><header class="site-header no-print"><header class="site-header no-print">
+    <div class="nav-wrap">
+        <a class="brand" href="index.html">ELITE <span>INK</span></a>
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="prices.html">Prices</a>
+            <a href="booking.html">Book Appointment</a>
+        </nav>
+    </div>
+</header><main class="booking-wrap"><div id="bookingHeading" class="no-print">
+    <h1>Book Your Appointment</h1>
+    <p class="subtitle">Your tattoo journey starts here. No online payment required.</p>
+</div>
+
+<section class="booking-box no-print" id="bookingBox">
+
+    <div class="step-label" id="stepLabel">STEP 1 OF 4 — CHOOSE TATTOO</div>
+    <div class="progress"><div id="progressFill"></div></div>
+
+    <form id="bookingForm" novalidate>
+
+        <section class="step active">
+            <h2>Choose Your Tattoo</h2>
+            <p class="subtitle">Select the category that best fits your design.</p>
+
+            <div class="choices">
+                <button type="button" class="choice" data-service="Small Tattoo" data-price="From $400">
+                    <strong>Small Tattoo</strong>
+                    <span>From $400</span>
+                </button>
+
+                <button type="button" class="choice" data-service="Medium Tattoo" data-price="From $600">
+                    <strong>Medium Tattoo</strong>
+                    <span>From $600</span>
+                </button>
+
+                <button type="button" class="choice" data-service="Large Tattoo" data-price="From $900">
+                    <strong>Large Tattoo</strong>
+                    <span>From $900</span>
+                </button>
+
+                <button type="button" class="choice" data-service="Sleeve / Large-Scale Work" data-price="From $1,500">
+                    <strong>Sleeves & Large Work</strong>
+                    <span>From $1,500</span>
+                </button>
+            </div>
+
+            <div class="field">
+                <label for="design">Describe your design</label>
+                <textarea id="design" placeholder="What tattoo would you like?"></textarea>
+            </div>
+
+            <div class="field">
+                <label for="placement">Body placement</label>
+                <input id="placement" placeholder="e.g. arm, chest, shoulder">
+            </div>
+        </section>
+
+        <section class="step">
+            <h2>Your Details</h2>
+
+            <div class="field">
+                <label for="customerName">Full name *</label>
+                <input id="customerName" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+                <label for="phone">Phone number *</label>
+                <input id="phone" type="tel" autocomplete="tel" required>
+            </div>
+
+            <div class="field">
+                <label for="email">Email address (optional)</label>
+                <input id="email" type="email" autocomplete="email">
+            </div>
+        </section>
+
+        <section class="step">
+            <h2>Choose Appointment Time</h2>
+
+            <div class="field">
+                <label for="date">Preferred date *</label>
+                <input id="date" type="date" required>
+            </div>
+
+            <div class="field">
+                <label for="time">Preferred time *</label>
+                <select id="time" required>
+                    <option value="">Choose a time</option>
+                    <option>09:00 AM</option>
+                    <option>10:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>12:00 PM</option>
+                    <option>01:00 PM</option>
+                    <option>02:00 PM</option>
+                    <option>03:00 PM</option>
+                    <option>04:00 PM</option>
+                </select>
+            </div>
+
+            <p class="note">
+                This is your preferred appointment time. It is not confirmed until the studio approves it.
+            </p>
+        </section>
+
+        <section class="step">
+            <h2>Review Your Booking</h2>
+            <p class="subtitle">Check your information before creating your receipt.</p>
+
+            <div class="review" id="review"></div>
+
+            <p class="note">
+                No online payment is required. Payment is cash at the studio.
+                This demo creates a receipt in your browser but does not send your booking to the studio.
+            </p>
+
+            <div class="field">
+                <label>
+                    <input type="checkbox" id="agree" style="width:auto">
+                    I have checked my details and understand that the appointment is pending confirmation.
+                </label>
+            </div>
+        </section>
+
+        <div class="actions">
+            <button type="button" id="backBtn">Back</button>
+            <button type="button" id="nextBtn">Continue</button>
+            <button type="submit" id="createBtn" class="hidden">Create Receipt</button>
+        </div>
+
+    </form>
+</section>
+
+<section id="receipt" class="hidden">
+    <h2>ELITE INK</h2>
+    <p><strong>APPOINTMENT REQUEST RECEIPT</strong></p>
+    <p>Receipt number: <strong id="receiptNo"></strong></p>
+
+    <div id="receiptRows"></div>
+
+    <div class="receipt-status">
+        <strong>Appointment:</strong> Pending confirmation<br>
+        <strong>Payment:</strong> Not paid<br>
+        <strong>Payment method:</strong> Cash at studio
+    </div>
+
+    <p>Keep this receipt for your records. Your appointment is not confirmed until the studio approves it.</p>
+
+    <div class="no-print">
+        <button type="button" id="printBtn">Print / Save as PDF</button>
+        <p><a href="index.html">Return to Home</a></p>
+    </div>
+</section>
+
+</main><script>
+(function () {
+    var steps = Array.from(document.querySelectorAll(".step"));
+    var current = 0;
+    var service = "";
+    var price = "";
+
+    var label = document.getElementById("stepLabel");
+    var progress = document.getElementById("progressFill");
+    var back = document.getElementById("backBtn");
+    var next = document.getElementById("nextBtn");
+    var create = document.getElementById("createBtn");
+    var form = document.getElementById("bookingForm");
+
+    var names = [
+        "CHOOSE TATTOO",
+        "YOUR DETAILS",
+        "APPOINTMENT",
+        "REVIEW BOOKING"
+    ];
+
+    var dateInput = document.getElementById("date");
+    var today = new Date();
+    var todayString = new Date(
+        today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().slice(0, 10);
+
+    dateInput.min = todayString;
+
+    document.querySelectorAll(".choice").forEach(function (button) {
+        button.addEventListener("click", function () {
+            service = button.getAttribute("data-service");
+            price = button.getAttribute("data-price");
+
+            document.querySelectorAll(".choice").forEach(function (item) {
+                item.classList.remove("selected");
+            });
+
+            button.classList.add("selected");
+        });
+    });
+
+    function showStep(number) {
+        current = number;
+
+        steps.forEach(function (step, index) {
+            step.classList.toggle("active", index === current);
+        });
+
+        label.textContent = "STEP " + (current + 1) + " OF 4 — " + names[current];
+        progress.style.width = ((current + 1) * 25) + "%";
+
+        back.style.visibility = current === 0 ? "hidden" : "visible";
+        next.classList.toggle("hidden", current === 3);
+        create.classList.toggle("hidden", current !== 3);
+
+        if (current === 3) {
+            buildReview();
+        }
+    }
+
+    function validateStep() {
+        if (current === 0 && !service) {
+            alert("Please choose a tattoo category.");
+            return false;
+        }
+
+        if (current === 1) {
+            if (!document.getElementById("customerName").value.trim()) {
+                alert("Please enter your full name.");
+                return false;
+            }
+
+            if (!document.getElementById("phone").value.trim()) {
+                alert("Please enter your phone number.");
+                return false;
+            }
+
+            if (!document.getElementById("email").checkValidity()) {
+                alert("Please enter a valid email address or leave it empty.");
+                return false;
+            }
+        }
+
+        if (current === 2) {
+            if (!dateInput.value || !document.getElementById("time").value) {
+                alert("Please select a preferred date and time.");
+                return false;
+            }
+
+            if (dateInput.value < todayString) {
+                alert("Please select today or a future date.");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function addRow(container, title, value) {
+        var row = document.createElement("div");
+        row.className = "receipt-row";
+
+        var left = document.createElement("span");
+        left.textContent = title;
+
+        var right = document.createElement("span");
+        right.textContent = value || "Not provided";
+
+        row.appendChild(left);
+        row.appendChild(right);
+        container.appendChild(row);
+    }
+
+    function buildReview() {
+        var review = document.getElementById("review");
+        review.replaceChildren();
+
+        addRow(review, "Tattoo", service);
+        addRow(review, "Starting price", price);
+        addRow(review, "Design", document.getElementById("design").value);
+        addRow(review, "Placement", document.getElementById("placement").value);
+        addRow(review, "Name", document.getElementById("customerName").value);
+        addRow(review, "Phone", document.getElementById("phone").value);
+        addRow(review, "Email", document.getElementById("email").value);
+        addRow(review, "Date", dateInput.value);
+        addRow(review, "Time", document.getElementById("time").value);
+    }
+
+    next.addEventListener("click", function () {
+        if (!validateStep()) {
+            return;
+        }
+
+        if (current < 3) {
+            showStep(current + 1);
+        }
+    });
+
+    back.addEventListener("click", function () {
+        if (current > 0) {
+            showStep(current - 1);
+        }
+    });
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!validateStep()) {
+            return;
+        }
+
+        if (!document.getElementById("agree").checked) {
+            alert("Please confirm that you have checked your details.");
+            return;
+        }
+
+        document.getElementById("receiptNo").textContent =
+            "EI-" + Date.now().toString().slice(-8);
+
+        var rows = document.getElementById("receiptRows");
+        rows.replaceChildren();
+
+        addRow(rows, "Customer", document.getElementById("customerName").value);
+        addRow(rows, "Phone", document.getElementById("phone").value);
+        addRow(rows, "Email", document.getElementById("email").value);
+        addRow(rows, "Tattoo", service);
+        addRow(rows, "Starting price", price);
+        addRow(rows, "Design", document.getElementById("design").value);
+        addRow(rows, "Placement", document.getElementById("placement").value);
+        addRow(rows, "Preferred date", dateInput.value);
+        addRow(rows, "Preferred time", document.getElementById("time").value);
+
+        document.getElementById("bookingHeading").classList.add("hidden");
+        document.getElementById("bookingBox").classList.add("hidden");
+        document.getElementById("receipt").classList.remove("hidden");
+
+        window.scrollTo(0, 0);
+    });
+
+    document.getElementById("printBtn").addEventListener("click", function () {
+        window.print();
+    });
+
+    // Preselect a category if the visitor came from the gallery.
+    var requested = new URLSearchParams(window.location.search).get("service") || "";
+    requested = requested.toLowerCase();
+
+    document.querySelectorAll(".choice").forEach(function (button) {
+        var name = button.getAttribute("data-service").toLowerCase();
+
+        if (requested && name.indexOf(requested.split(" ")[0]) !== -1) {
+            button.click();
+        }
+    });
+
+    showStep(0);
+})();
+</script></body>
+</html> 

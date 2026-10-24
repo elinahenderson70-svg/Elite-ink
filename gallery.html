@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tattoo Gallery | Elite Ink</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .gallery-intro {
+            max-width: 700px;
+            margin: 0 auto 35px;
+            text-align: center;
+            color: #c5c5c5;
+            line-height: 1.8;
+        }    .tattoo-card {
+        overflow: hidden;
+        border: 1px solid #373737;
+        border-radius: 14px;
+        background: #202020;
+    }
+
+    .tattoo-card img {
+        width: 100%;
+        height: 260px;
+        display: block;
+        object-fit: cover;
+    }
+
+    .tattoo-card-content {
+        padding: 22px;
+    }
+
+    .tattoo-card-content h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .tattoo-card-content p {
+        color: #c5c5c5;
+        line-height: 1.7;
+    }
+
+    .starting-price {
+        color: #c6b49a;
+        font-weight: bold;
+        margin: 15px 0;
+    }
+
+    .gallery-grid {
+        align-items: stretch;
+    }
+
+    @media (max-width: 600px) {
+        .tattoo-card img {
+            height: 230px;
+        }
+    }
+</style>
+
+</head>
+<body>a</head>
+<body><div id="elite-loader">
+    <div class="elite-loader-logo">ELITE <span>INK</span></div>
+    <div class="elite-loader-ring"></div>
+    <div class="elite-loader-text">PREPARING YOUR EXPERIENCE</div>
+</div><script>
+(function () {
+    var loader = document.getElementById("elite-loader");
+
+    function hideLoader() {
+        if (loader) {
+            loader.classList.add("loader-hidden");
+        }
+    }
+
+    window.addEventListener("load", function () {
+        setTimeout(hideLoader, 700);
+    });
+
+    setTimeout(hideLoader, 4000);
+})();
+</script><header class="site-header no-print"><header class="site-header">
+    <div class="nav-wrap">
+        <a class="brand" href="index.html">ELITE <span>INK</span></a>
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="prices.html">Prices</a>
+            <a href="booking.html">Book Appointment</a>
+        </nav>
+    </div>
+</header><main class="container">
+    <div class="page-heading">
+        <h1>Explore Our Tattoo Gallery</h1>
+    </div><p class="gallery-intro">
+    Discover different tattoo sizes and styles before choosing your design.
+    These images are visual references to help you understand the options.
+    Your final design and price will be confirmed during your appointment request.
+</p>
+
+<div class="gallery-grid">
+
+    <article class="tattoo-card">
+        <img
+            src="https://images.unsplash.com/photo-1590246814883-57c511e7e2a9?auto=format&fit=crop&w=900&q=85"
+            alt="Small tattoo design reference"
+            loading="lazy">
+        <div class="tattoo-card-content">
+            <h2>Small Tattoos</h2>
+            <p>Simple symbols, fine-line designs, small lettering, and minimal artwork.</p>
+            <p class="starting-price">From $400</p>
+            <a class="button" href="booking.html?service=Small%20Tattoo">Choose Small</a>
+        </div>
+    </article>
+
+    <article class="tattoo-card">
+        <img
+            src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?auto=format&fit=crop&w=900&q=85"
+            alt="Medium tattoo design reference"
+            loading="lazy">
+        <div class="tattoo-card-content">
+            <h2>Medium Tattoos</h2>
+            <p>More detailed artwork, custom designs, portraits, and medium-sized pieces.</p>
+            <p class="starting-price">From $600</p>
+            <a class="button" href="booking.html?service=Medium%20Tattoo">Choose Medium</a>
+        </div>
+    </article>
+
+    <article class="tattoo-card">
+        <img
+            src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=900&q=85"
+            alt="Large tattoo design reference"
+            loading="lazy">
+        <div class="tattoo-card-content">
+            <h2>Large Tattoos</h2>
+            <p>Detailed custom artwork, realism, and larger pieces for the back or chest.</p>
+            <p class="starting-price">From $900</p>
+            <a class="button" href="booking.html?service=Large%20Tattoo">Choose Large</a>
+        </div>
+    </article>
+
+    <article class="tattoo-card">
+        <img
+            src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=900&q=85"
+            alt="Tattoo sleeve design reference"
+            loading="lazy">
+        <div class="tattoo-card-content">
+            <h2>Sleeves & Large-Scale Work</h2>
+            <p>Half sleeves, full sleeves, Japanese-style designs, and large back projects.</p>
+            <p class="starting-price">From $1,500</p>
+            <a class="button" href="booking.html?service=Sleeve%20Tattoo">Choose Sleeve</a>
+        </div>
+    </article>
+
+</div>
+
+<div style="text-align:center; margin:40px 0;">
+    <a class="button" href="prices.html">View All Prices</a>
+</div>
+
+</main><footer style="text-align:center; padding:25px; color:#aaa;">
+    <p>&copy; 2026 Elite Ink. All rights reserved.</p>
+</footer></body>
+</html>
